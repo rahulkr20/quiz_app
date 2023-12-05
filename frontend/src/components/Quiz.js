@@ -33,7 +33,6 @@ const questions = [
   },
   
 
-  // Add more questions and options
 ];
 
 function Quiz() {
