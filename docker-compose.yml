@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  frontend:
+    image: client_side:1.0
+    container_name: frontend
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+  backend:
+    image: server_side:1.0
+    container_name: backend
+    restart: always
+    ports:
+      - 5000:5000
