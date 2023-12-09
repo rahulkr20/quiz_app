@@ -28,8 +28,8 @@ pipeline {
         stage('Build Frontend and Backend Images') {
             steps {
                 script {
-                    bat 'docker build -t rahulkr20/Quiz:frontend'
-                    bat 'docker build -t rahulkr20/Quiz:backend'
+                    bat 'docker build -t rahulkr20/Quiz:frontend frontend'
+                    bat 'docker build -t rahulkr20/Quiz:backend backend'
                 }
             }
         }
