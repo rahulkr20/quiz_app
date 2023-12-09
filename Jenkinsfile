@@ -1,8 +1,11 @@
 pipeline {
-    // Telling Jenkins to run the pipeline on any available agent. 
     agent any
-    options {
-        skipDefaultCheckout(true)
+    
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('rahul-dockerhub')
+        DOCKER_IMAGE_NAME = 'rahulkr20/capstone:1.0'
+        DOCKER_EXE_PATH = 'C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe'
+        CURRENT_STAGE = ''
     }
     stages {
         stage('Git Checkout') {
@@ -28,17 +31,17 @@ pipeline {
         stage('Build Frontend and Backend Images') {
             steps {
                 script {
-                    bat 'docker build -t rahulkr20/Quiz:frontend frontend'
-                    bat 'docker build -t rahulkr20/Quiz:backend backend'
+                    bat 'docker build -t rahulkr20/capstone:1.0 frontend'
+                    bat 'docker build -t rahulkr20/capstone:1.0 backend'
                 }
             }
         }
         // This stage is pushing images to dockerhub.
         stage('Push Images to Hub') {
             steps {
-                withDockerRegistry([ credentialsId: "rahul-dockerhub", url: "https://index.docker.io/v1/" ]) {
-                    bat 'docker push rahulkr20/Quiz:frontend'
-                    bat 'docker push rahulkr20/Quiz:backend'
+                withDockerRegistry([ credentialsId: "rahul-dockerhub", url: "" ]) {
+                    bat 'docker push rahulkr20/capstone:1.0'
+                    bat 'docker push rahulkr20/capstone:1.0'
                 }
             }
         }
